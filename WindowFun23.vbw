@@ -1,0 +1,5 @@
+modMain = 52, 52, 1364, 702, C
+frmMain = 130, 130, 1442, 780, C, 78, 78, 1390, 728, C
+modSharedMem = 52, 52, 1262, 694, C
+WindowTimer = 78, 78, 1288, 720, C
+modTimer = 104, 104, 1314, 746, C
