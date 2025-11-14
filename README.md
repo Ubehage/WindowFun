@@ -48,7 +48,11 @@ The **main text** reports how many windows are open at that level.
 - Created for enjoyment, stress testing, and late-night learning.
 - Criticism and suggestions are welcome; feel free to fork, refactor, or improve!
 - No guarantees or warranties.
-
+##
+- The codebase contains **no comments**. This is an intentional choice and reflects my personal coding style.
+- WindowFun was written for fun, and has been optimized as flaws were spotted during use.
+- What you see is what you get: a late-night project, quick and messy, with improvements added along the way.
+- You are welcome to interpret, refactor, or document the code further—but I prefer it as-is.
 ## License
 
 MIT License.
