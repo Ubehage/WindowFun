@@ -135,7 +135,7 @@ End Sub
 
 Public Sub ChangeBeepStateForAll()
   Dim i As Long
-  For i = 1 To UBound(SharedMemory.Level)
+  For i = LBound(SharedMemory.Level) To UBound(SharedMemory.Level)
     With SharedMemory.Level(i)
       .Data1 = AppMessages.amSetBeep
       .Data2 = IIf(BeepWhenDone = True, 1, 0)
@@ -225,7 +225,6 @@ Private Sub ShowStartMessage()
   Select Case MsgBox(m, vbYesNo Or vbDefaultButton2, "WindowFun23 Instructions")
     Case vbYes
       Call OpenSharedMemory
-      Call ClearSharedMemory
       
       
       'This is just for fun. Uncomment for a ride.
@@ -235,7 +234,7 @@ Private Sub ShowStartMessage()
       '  SharedMemory.Level(i).Data1 = AppMessages.amRunNext
       '  Call WriteToSharedMemory(False, i)
       'Next
-      'SharedMemory.Level(j + 1).Data1 = AppMessages.amAllEffects
+      'SharedMemory.Level(j + 1).Data1 = AppMessages.amExit
       'Call WriteToSharedMemory(False, (j + 1))
       
       

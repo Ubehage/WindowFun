@@ -23,15 +23,16 @@ Private Const PAGE_READWRITE As Long = &H4&
 Private Const FILE_MAP_ALL_ACCESS As Long = &HF001F
 
 Global Const SHAREDMEM_NAME As String = "Local\UbeWinFun23"
+Private Const SHAREDMEM_INDEXES = 1024
 Private Const SHAREDMEM_DATASIZE As Long = 2
-Private Const SHAREDMEM_SIZE As Long = 1024 * SHAREDMEM_DATASIZE
+Private Const SHAREDMEM_SIZE As Long = SHAREDMEM_INDEXES * SHAREDMEM_DATASIZE
 
 Public Type SHAREDMEM_DATA
   Data1 As Byte
   Data2 As Byte
 End Type
 Public Type SHARED_MEMORY_LAYOUT
-  Level(0 To 1023) As SHAREDMEM_DATA
+  Level(0 To (SHAREDMEM_INDEXES - 1)) As SHAREDMEM_DATA
 End Type
 
 Private Declare Function CreateFileMapping Lib "kernel32" Alias "CreateFileMappingA" (ByVal hFile As Long, ByVal lpFileMappingAttributes As Long, ByVal flProtect As Long, ByVal dwMaximumSizeHigh As Long, ByVal dwMaximumSizeLow As Long, ByVal lpName As String) As Long
