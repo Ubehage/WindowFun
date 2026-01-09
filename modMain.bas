@@ -15,6 +15,7 @@ Private Const SWP_SETWINDOWPOS = SWP_NOSIZE Or SWP_NOMOVE
 Private Const CMD_RUN = "bgnjdds"
 Private Const CMD_LEVEL = "ubglzfz"
 Private Const CMD_RANDOM = "ygrfjdrf"
+Private Const CMD_BEEP = "hnoitnd"
 Private Const CMD_SEP1 = ":"
 Private Const CMD_SEP2 = ";"
 
@@ -175,6 +176,8 @@ Private Sub SplitCommandLine(CommandLine As String)
         AppLevel = CLng(cC(UBound(cC)))
       Case CMD_RANDOM
         RandomSeed = CLng(cC(UBound(cC)))
+      Case CMD_BEEP
+        BeepWhenDone = True
     End Select
   Next
 End Sub
@@ -188,7 +191,8 @@ End Function
 Private Function GetCommandLine(NextLevel As Long) As String
   GetCommandLine = CMD_RUN & CMD_SEP2 & _
       CMD_LEVEL & CMD_SEP1 & Trim$(Str$(NextLevel)) & CMD_SEP2 & _
-      CMD_RANDOM & CMD_SEP1 & Trim$(Str$(GetRandomNumber(1, 5000)))
+      CMD_RANDOM & CMD_SEP1 & Trim$(Str$(GetRandomNumber(1, 5000))) & _
+      IIf(BeepWhenDone = True, CMD_SEP2 & CMD_BEEP, "")
 End Function
 
 Private Function GetAppFile() As String
@@ -234,9 +238,9 @@ Private Sub ShowStartMessage()
       '  SharedMemory.Level(i).Data1 = AppMessages.amRunNext
       '  Call WriteToSharedMemory(False, i)
       'Next
-      'SharedMemory.Level(j + 1).Data1 = AppMessages.amExit
+      'SharedMemory.Level(j + 1).Data1 = AppMessages.amAllEffects
       'Call WriteToSharedMemory(False, (j + 1))
-      
+      'BeepWhenDone = True
       
       RunNew 0
       CloseSharedMemory
