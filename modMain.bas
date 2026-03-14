@@ -72,7 +72,7 @@ Sub Main()
   IsInIDE = IDECheck()
   
   '#Debug
-  'SplitCommandLine GetCommandLine(7)
+  'SplitCommandLine GetCommandLine(3)
   
   SplitCommandLine Command
   If RandomSeed = 0 Then RandomSeed = Timer
@@ -229,19 +229,6 @@ Private Sub ShowStartMessage()
   Select Case MsgBox(m, vbYesNo Or vbDefaultButton2, "WindowFun23 Instructions")
     Case vbYes
       Call OpenSharedMemory
-      
-      
-      'This is just for fun. Uncomment for a ride.
-      'Dim i As Long, j As Long
-      'j = 8
-      'For i = 0 To j
-      '  SharedMemory.Level(i).Data1 = AppMessages.amRunNext
-      '  Call WriteToSharedMemory(False, i)
-      'Next
-      'SharedMemory.Level(j + 1).Data1 = AppMessages.amAllEffects
-      'Call WriteToSharedMemory(False, (j + 1))
-      'BeepWhenDone = True
-      
       RunNew 0
       CloseSharedMemory
   End Select

@@ -32,6 +32,7 @@ Every window displays available controls in its main text area:
 - **C:** Fade out and close.
 - **A:** Perform all closing effects.
 - **B:** Toggle beep when closing: ON/OFF.
+- **P:** Start Autorun up to a selected level.
 
 The **window's title bar** shows the current “level” (internal app logic).  
 The **main text** reports how many windows are open at that level.

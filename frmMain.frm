@@ -45,7 +45,8 @@ Private Const LABEL_CAPTION = "Click - Close and end.%b%" & _
                               "F - Shrink and close.%b%" & _
                               "C - Fade out and close.%b%" & _
                               "A - Do all effects.%b%" & _
-                              "B - Beep when closing: %beep%"
+                              "B - Beep when closing: %beep%%b%" & _
+                              "P - Autorun up to a level."
 
 Private Const COLOR_FADE_VALUE = 5
 Private Const LABEL_SIZE_CHANGE_SMALL = 2
@@ -301,6 +302,24 @@ Private Sub ToggleBeepWhenDone()
   ChangeBeepStateForAll
 End Sub
 
+Private Sub StartAutoRun()
+  Dim i As Long, n As String, l As Long, t As Boolean
+  If Not fTimer Is Nothing Then If fTimer.Enabled = True Then t = True
+  If t = True Then fTimer.Enabled = False
+  n = InputBox("Input target level" & vbCrLf & "Warning: Anything above 9 can halt your system.", "WindowFun - AutoRun")
+  If n = "" Then GoTo ExitAutoRun
+  If IsNumeric(n) = False Then GoTo ExitAutoRun
+  l = CLng(n)
+  If l <= AppLevel Then GoTo ExitAutoRun
+  If l >= 9 Then If Not MsgBox("Are you sure?" & vbCrLf & "You selected target level " & CStr(l) & "." & vbCrLf & "This can take a lot of time and potentially stall your pc.", vbYesNo Or vbQuestion, "WindowFun - AutoRun") = vbYes Then GoTo ExitAutoRun
+  For i = AppLevel To (l - 1)
+    SharedMemory.Level(i).Data1 = AppMessages.amRunNext
+    Call WriteToSharedMemory(False, i)
+  Next
+ExitAutoRun:
+  If t = True Then If Not fTimer Is Nothing Then fTimer.Enabled = True
+End Sub
+
 Private Sub Form_Click()
   If IsLooping Then
     UnloadNow = True
@@ -322,6 +341,8 @@ Friend Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
         ToggleBeepWhenDone
       Case vbKeyA
         SetAppMessage amAllEffects
+      Case vbKeyP
+        StartAutoRun
     End Select
   End If
 End Sub
