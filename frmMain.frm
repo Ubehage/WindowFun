@@ -69,7 +69,7 @@ Dim ScaleDiffY As Long
 Friend Sub SetForm()
   ScaleDiffX = (Me.Width - Me.ScaleWidth)
   ScaleDiffY = (Me.Height - Me.ScaleHeight)
-  WindowOnTop Me.hWnd, True
+  'WindowOnTop Me.hWnd, True
   Me.AutoRedraw = True
   Me.Font.Size = modMain.GetRandomNumber(59, 521)
   SetRandomFormAndLabel
@@ -350,7 +350,7 @@ End Sub
 Private Sub Form_Unload(Cancel As Integer)
   If UnloadedByCode Then
     KillTimer
-    WindowOnTop Me.hWnd, False
+    'WindowOnTop Me.hWnd, False
     Call CloseSharedMemory
   Else
     If Not DoColorOut Then
